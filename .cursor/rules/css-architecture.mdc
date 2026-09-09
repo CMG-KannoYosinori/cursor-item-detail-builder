@@ -1,0 +1,21 @@
+---
+description: CSS の Modern BEM 構成、コメントセクション区切り、SP フルードスケーリング
+globs: "**/*.css,**/*.html"
+alwaysApply: false
+---
+
+# CSS アーキテクチャ
+
+`{id}html/dist/styles/style.css` が唯一の CSS ソース。Sass は使わずこのファイルを直接編集する。
+
+詳細は @docs/css-architecture.md に従う。
+
+## 必守
+
+- 見出しコメント（`/* ===... Blocks — xxx ... === */`）を消したり、Block をまたいで混在させたりしない。1 セクション = 1 Block
+- ある Block/ページのセクションから別の Block を直接スタイリングしない（例: `.p{id}-project .p{id}-button {}` は不可）
+- クラス命名: Block は `p{id}-{block}`、Element は `p{id}-{block}__{element}`、Modifier は `--{modifier}`、State は `is-*` / `data-*`
+- ブレークポイントは `640px` 単一（モバイルファースト）。PC は `pc:` プレフィックスまたは `@media (width >= 640px)`
+- SP/PC の画像出し分けは CSS 背景ではなく `<picture>`
+- HTML の特殊文字は実体参照（例: `®` → `&#174;`）
+- `/coding` 時の SP は `calc(カンプ測定値 / 750 * 100vw)`。PC は 1280px カンプ測定値を 2 で割った px で上書きする
